@@ -2,11 +2,11 @@
 
 
 
-int servo1Pin = 2;
-int servo2Pin = 3;
-int servo3Pin = 4;
-int servo4Pin = 5;
-int servo5Pin = 6;
+int servo1Pin = 1;
+int servo2Pin = 2;
+int servo3Pin = 3;
+int servo4Pin = 4;
+int servo5Pin = 5;
 
 Servo s1;
 Servo s2;
@@ -19,7 +19,6 @@ void setup() {
   
   s1.attach(servo1Pin);
   s2.attach(servo2Pin);
-  s2.write(128); //turn off the continuous one.
   s3.attach(servo3Pin);
   s4.attach(servo4Pin);
   s5.attach(servo5Pin);
@@ -27,11 +26,13 @@ void setup() {
 }
 
 void writeToServo(int servo, int angle) {
-  if ( servo == 1 ) s1.write(angle);
-  if ( servo == 2 ) s2.write(angle);
+  //first three use different pulse ranges
+  if ( servo == 1 ) s1.writeMicroseconds(angle*2000.0/180.0 + 500);
+  if ( servo == 2 ) s2.writeMicroseconds(angle*2000.0/180.0 + 500);
   if ( servo == 3 ) s3.writeMicroseconds(angle*2000.0/180.0 + 500);
+  //these two are standard
   if ( servo == 4 ) s4.write(angle);
-  if ( servo == 5 ) s5.writeMicroseconds(angle*2000.0/180.0 + 500);
+  if ( servo == 5 ) s5.write(angle);
 }
 
 
